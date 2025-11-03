@@ -2,7 +2,8 @@
 
 class Program {
     static void Main(string[] args) {
-        Console.WriteLine("Hallo Welt");
+        Console.WriteLine("Modul 319 - Applikationen entwerfen und implementieren.");
+        Console.WriteLine("Ich lerne die Programmiersprache C#.");
     }
 }
  
