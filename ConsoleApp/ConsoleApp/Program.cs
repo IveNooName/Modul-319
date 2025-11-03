@@ -1,3 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿// See https://aka.ms/new-console-template for more informationusing System;
 
-Console.WriteLine("Hello, World!");
+class Program {
+    static void Main(string[] args) {
+        Console.WriteLine("Hallo Welt");
+    }
+}
+ 
