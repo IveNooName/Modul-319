@@ -5,9 +5,7 @@ using System.Security.AccessControl;
 
 class ConsoleApp {
     static void Main(string[] args) {
-        // task1();
-        task2_2_4_b();
-        
+        task2_2d();
     }
 
     public static void task1() {
@@ -20,26 +18,43 @@ class ConsoleApp {
         int value = 1000555;
         bool isValid = true;
         char letter = 'Z';
-
     }
+
     public static void task2_1_2_f() {
         long x = 2147483648;
         float pi = 3.14f;
         decimal preis = 9.99m;
         bool aktiv = true;
-
     }
 
     public static void task2_1_2_g() {
         int number;
         number = 7;
         int result = number * 3;
-
     }
-    public static void task2_2_4_b() {
+
+    public static void task2_2a() {
         Console.Write("Wie heisst du? ");
-        string name = Console.ReadLine();
-        Console.WriteLine("\n" + name);
+        String name = Console.ReadLine();
+        Console.WriteLine("\nHallo {0}, willkommen zum C#-Grundkurs!", name);
+    }
+
+    public static void task2_2b() {
+        Console.Write("Wie alt bist du? ");
+
+        try {
+            int age = int.Parse(Console.ReadLine());
+            Console.WriteLine("\nDu bist {0} Monate alt.", age * 12);
+        }
+        catch (Exception) {
+            Console.WriteLine("\nERROR");
+        }
+    }
+
+    public static void task2_2d() {
+        string name = "Max";
+        int alter = 20;
+
+        Console.WriteLine($"___");
     }
 }
- 
