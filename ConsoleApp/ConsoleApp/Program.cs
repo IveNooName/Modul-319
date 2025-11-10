@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 
 class ConsoleApp {
     static void Main(string[] args) {
-        task2_2e();
+        task2_2f();
     }
 
     public static void task1() {
@@ -67,6 +67,21 @@ class ConsoleApp {
         }
         else {
             Console.Error.WriteLine("\nUngültige Eingabe.");
+        }
+    }
+    
+    public static void task2_2f() {
+        Console.Write("Gib den Radius in cm ein: ");
+        string input = Console.ReadLine();
+
+        if (double.TryParse(input, out double UserNumber)) {
+
+            double result = Math.Pow(UserNumber, 2) * Math.PI;
+            
+            Console.WriteLine("\nDie Fläche des Kreises beträgt: {0:F2} cm²", result);
+        }
+        else {
+            Console.Error.WriteLine("\nUngültige Eingabe! Bitte gib eine gültige Kommazahl ein.");
         }
     }
 }
