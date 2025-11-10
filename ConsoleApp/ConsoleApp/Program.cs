@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 
 class ConsoleApp {
     static void Main(string[] args) {
-        task2_2d();
+        task2_2e();
     }
 
     public static void task1() {
@@ -53,8 +53,20 @@ class ConsoleApp {
 
     public static void task2_2d() {
         string name = "Max";
-        int alter = 20;
+        int age = 20;
 
-        Console.WriteLine($"___");
+        Console.WriteLine($"Name: {name}, Alter: {age}");
+    }
+    
+    public static void task2_2e() {
+        Console.Write("Bitte gib eine Ganzzahl ein: ");
+        string input = Console.ReadLine();
+
+        if (int.TryParse(input, out int result)) {
+            Console.WriteLine("\nDu hast {0} eingegeben.", result);
+        }
+        else {
+            Console.Error.WriteLine("\nUngültige Eingabe.");
+        }
     }
 }
