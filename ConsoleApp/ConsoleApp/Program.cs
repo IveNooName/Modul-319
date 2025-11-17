@@ -1,11 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more informationusing System;
 
-using System.Runtime.InteropServices;
-using System.Security.AccessControl;
-
 class ConsoleApp {
     static void Main(string[] args) {
-        task2_2f();
+        task2_4_2_c();
     }
 
     public static void task1() {
@@ -33,13 +30,13 @@ class ConsoleApp {
         int result = number * 3;
     }
 
-    public static void task2_2a() {
+    public static void task2_2_a() {
         Console.Write("Wie heisst du? ");
         String name = Console.ReadLine();
         Console.WriteLine("\nHallo {0}, willkommen zum C#-Grundkurs!", name);
     }
 
-    public static void task2_2b() {
+    public static void task2_2_b() {
         Console.Write("Wie alt bist du? ");
 
         try {
@@ -51,14 +48,14 @@ class ConsoleApp {
         }
     }
 
-    public static void task2_2d() {
+    public static void task2_2_d() {
         string name = "Max";
         int age = 20;
 
         Console.WriteLine($"Name: {name}, Alter: {age}");
     }
     
-    public static void task2_2e() {
+    public static void task2_2_e() {
         Console.Write("Bitte gib eine Ganzzahl ein: ");
         string input = Console.ReadLine();
 
@@ -70,7 +67,7 @@ class ConsoleApp {
         }
     }
     
-    public static void task2_2f() {
+    public static void task2_2_f() {
         Console.Write("Gib den Radius in cm ein: ");
         string input = Console.ReadLine();
 
@@ -84,4 +81,61 @@ class ConsoleApp {
             Console.Error.WriteLine("\nUngültige Eingabe! Bitte gib eine gültige Kommazahl ein.");
         }
     }
+
+    public static void task2_3_a() {
+        
+        /*
+         * The user inputs a value for the radius of the circle and
+         * this Skript will calculate the 2D surface from the circle.
+         */
+        
+        
+        Console.Write("Gib den Radius in cm ein: ");
+        String input = Console.ReadLine();
+
+        if (double.TryParse(input, out double radius)) { //Tries to convert the String in a double
+            Console.WriteLine($"Kreisradius: {radius} cm");
+            double surface = Math.PI * radius * radius;
+
+            Console.WriteLine($"Die Fläche des Kreises beträgt: {surface} cm²");
+            Console.WriteLine($"                      gerundet: {surface:F2} cm²");
+        }
+        else {
+            Console.WriteLine("Ungültige Eingabe.");
+        }
+    }
+    
+    public static void task2_4_2_b() {
+        
+        Console.Write("Was ist deine Lieblingsfarbe? ");
+        String inputColor = Console.ReadLine().ToLower();
+
+        Console.WriteLine();
+
+        switch (inputColor) {
+            case "rot":
+                Console.WriteLine("Rot ist eine sehr kräftige Farbe!");
+                break;
+            case "blau":
+                Console.WriteLine("Blau wirkt beruhigend.");
+                break;
+            case "grün":
+                Console.WriteLine("Grün erinnert an die Natur.");
+                break;
+            default:
+                Console.WriteLine("Diese Farbe kenne ich nicht.");
+                break;
+        }
+    }
+    
+    public static void task2_4_2_c() {
+        int number = 2;
+        if (number % 2 == 0) {
+            Console.WriteLine("Die Zahl ist gerade.");
+        }
+        else {
+            Console.WriteLine("Die Zahl ist ungerade.");
+        }
+    }
 }
+
