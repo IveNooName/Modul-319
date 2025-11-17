@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasks2.1-2.3", "Tasks2.1-2.3\Tasks2.1-2.3.csproj", "{5C95D865-5307-4BF7-A975-6C4C32073CEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterTask2.1", "Tasks2.1-2.3\MasterTask2.1.csproj", "{5C95D865-5307-4BF7-A975-6C4C32073CEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
