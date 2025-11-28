@@ -21,5 +21,5 @@ Das Repository enthält sämtliche Aufgaben aus dem Modul.
 ## Hinweise
 Das `.gitignore` ist auf **JetBrains Rider** ausgelegt.  
 Bei Verwendung von anderen IDEs wie **VS Code** müssen eventuell weitere Einträge hinzugefügt werden.
-## Zweck
+## Zweck:
 Dieses Repository darf von anderen Lernenden frei genutzt werden – auch zum abschreiben :)
