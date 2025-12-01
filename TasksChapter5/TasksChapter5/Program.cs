@@ -39,4 +39,5 @@ class Program {
         return price * (1 - percentage / 100.0); 
         //(1 - percentage / 100.0) is for calculating the special percent, that the program works
     }
+    
 }
