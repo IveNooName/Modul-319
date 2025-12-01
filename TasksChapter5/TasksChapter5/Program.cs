@@ -7,6 +7,8 @@ class Program {
         addTwoDigitsTogether(66, 1);
         isOfLegalAge(67);
         sayHelloWithName("Ruby");
+        isDigitEven(67); 
+        priceWithPercentage(100, 20);
     }
 
     private static void sayHello() {
@@ -27,5 +29,14 @@ class Program {
 
     private static void sayHelloWithName(String name) {
         Console.WriteLine("Hello " + name + "!");
+    }
+
+    private static bool isDigitEven(int number) {
+        return number % 2 == 0;
+    }
+
+    private static double priceWithPercentage(double price, int percentage) {
+        return price * (1 - percentage / 100.0); 
+        //(1 - percentage / 100.0) is for calculating the special percent, that the program works
     }
 }
