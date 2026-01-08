@@ -26,6 +26,7 @@ public class Program {
         Console.Write("Lenght: ");
 
         if (int.TryParse(Console.ReadLine(), out int length) && length >= 0) {
+            
             String password = generator(length);
             
             Console.WriteLine("\n=======================================");
@@ -35,9 +36,10 @@ public class Program {
             Console.WriteLine("\u001B[32m" + password + "\u001B[0m");
             
             Console.WriteLine("=======================================");
-            Console.WriteLine();
+            Console.WriteLine(); //Layout
         } else {
             Console.WriteLine("\u001B[31m" + "Sorry, that's not a number, that can generate the password! Please enter a number that is one or bigger." + "\u001B[0m");
+            Console.WriteLine(); //Layout
         }
     }
 
