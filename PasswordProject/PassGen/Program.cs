@@ -1,11 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using PasswordProject;
+using PassGen;
 
 public class Program {
     public static void Main() {
         printHeader();
-
+        
         bool isActive = true;
         String password = "";
         
@@ -15,11 +15,11 @@ public class Program {
             if (selection == 1) {
                 password = passwordGenerator();
             } else if (selection == 2) {
-                APIsForDatabase.safePassword(password);
+                APIsForDatabase.savePassword(password);
             } else if (selection == 3) {
                 APIsForDatabase.readPassword();
             } else if (selection == 4) {
-                
+                APIsForDatabase.deletePassword();
             } else {
                 isActive = false;
             }
@@ -57,7 +57,7 @@ public class Program {
 
 
     private static string generator(int length) {
-        char[][] matrix = LetterStorage.LettersForPassword(); //Location, where the chars are safed for the generation
+        char[][] matrix = LetterStorage.LettersForPassword(); //Location, where the chars are saved for the generation
 
         char[] generatedLetters = new char[length];
 
@@ -92,7 +92,7 @@ public class Program {
         int x = 0;
 
         Console.CursorVisible = false;
-        char[] loadingChars = { '⠇', '⠏', '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧' };
+        char[] loadingChars = ['⠇', '⠏', '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧'];
         int i = 0;
         while (x < times) {
             Thread.Sleep(90);
@@ -111,12 +111,18 @@ public class Program {
     private static int contextMenu() {
         
         Console.WriteLine("1) Generate a password");
-        Console.WriteLine("2) Safe Password");
-        Console.WriteLine("3) Look at the safed Passwords");
+        Console.WriteLine("2) Save Password");
+        Console.WriteLine("3) Look at the saved Passwords");
         Console.WriteLine("4) Delete Password");
         Console.WriteLine("5) Exit");
+
+        char selection;
         
-        char selection = Console.ReadLine()[0];
+        try {
+            selection = Console.ReadLine()[0];
+        } catch (Exception e) {
+            selection = 'H'; //Giving selection a letter, that triggers default in the switch statement.
+        }
         Console.WriteLine(); //Layout
          
         switch (selection) {

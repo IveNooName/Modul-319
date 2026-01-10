@@ -1,8 +1,8 @@
-namespace PasswordProject;
+namespace PassGen;
 
 public class APIsForDatabase {
     
-    public static void safePassword(String password) {
+    public static void savePassword(String password) {
         int resultDatabaseCreation = CreateDatabase.crateDatabase();
 
         if (resultDatabaseCreation == -1) {
@@ -15,7 +15,7 @@ public class APIsForDatabase {
                               "Did you generate a password?");
             Console.WriteLine(""); //Layout
         } else {
-            bool repeatContexMenu = true;
+            bool repeatContextMenu = true;
 
             do {
                 Console.Write("Would you like to like to enter a username and description? (y/n): ");
@@ -24,10 +24,10 @@ public class APIsForDatabase {
                 
                 switch (selection) {
                     case 'y':
-                        repeatContexMenu = false;
+                        repeatContextMenu = false;
                         String userName;
                         String description;
-                        bool safeStatus;
+                        bool saveStatus;
 
                         Console.WriteLine(); //Layout
                         
@@ -42,33 +42,29 @@ public class APIsForDatabase {
                         } while (description == "");
 
                         
-                        safeStatus = UseDatabase.writeDataInDatabase(userName, password, description);
-                        if (safeStatus) {
-                            Console.WriteLine("Password was successfully saved");
-                        } else {
-                            Console.WriteLine("A serious error occurred. Please try restart the application.");
-                        }
+                        saveStatus = UseDatabase.writeDataInDatabase(userName, password, description);
+                        Console.WriteLine(saveStatus
+                            ? "Password was successfully saved"
+                            : "A serious error occurred. Please try restart the application and try again.");
 
-                        
+
                         Console.WriteLine(); //Layout
                         break;
 
                     case 'n':
-                        repeatContexMenu = false;
-                        safeStatus = UseDatabase.writeDataInDatabase("Not Provided", password, "Not Provided");
+                        repeatContextMenu = false;
+                        saveStatus = UseDatabase.writeDataInDatabase("Not Provided", password, "Not Provided");
 
                         Console.WriteLine(); //Layout
-                        
-                        if (safeStatus) {
-                            Console.WriteLine("Password was successfully saved");
-                        } else {
-                            Console.WriteLine("A serious error occurred. Please try restart the application.");
-                        }
+
+                        Console.WriteLine(saveStatus
+                            ? "Password was successfully saved"
+                            : "A serious error occurred. Please try restart the application and try again.");
 
                         Console.WriteLine(); //Layout
                         break;
                 }
-            } while (repeatContexMenu);
+            } while (repeatContextMenu);
         }
     }
 
@@ -78,7 +74,7 @@ public class APIsForDatabase {
 
         do {
             Console.Write(
-                "Are you sure you want to show your passwords? Everybody around you can see all passwords! (y/n): "
+                "Are you sure you want to show your passwords? Everyone around you can see all passwords! (y/n): "
             );
             selection = Console.ReadKey().KeyChar;
 
@@ -97,6 +93,24 @@ public class APIsForDatabase {
     }
     
     public static void deletePassword() {
-       
+        Console.Write("Which Password would you like to delete? Enter the ID of the Password: ");
+
+        if (long.TryParse(Console.ReadLine(), out long passwordID)) {
+            int deleteStatus = UseDatabase.deleteDataInDatabase(passwordID);
+
+            switch (deleteStatus) {
+                case 1:
+                    Console.WriteLine($"The password was successfully deleted");
+                    break;
+                case 2:
+                    Console.WriteLine($"The ID {passwordID} was not found in the database");
+                    break;
+                case -1:
+                    Console.WriteLine("A serious error occurred. Please restart the application and try again.");
+                    break;
+            }
+
+            Console.WriteLine(); //Layout
+        }
     }
 }

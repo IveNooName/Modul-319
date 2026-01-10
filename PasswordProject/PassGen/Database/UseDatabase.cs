@@ -1,11 +1,11 @@
-namespace PasswordProject;
+namespace PassGen;
 
 using Microsoft.Data.Sqlite;
 
 public class UseDatabase {
     public static bool writeDataInDatabase(String User, String Password, String Description) {
         try {
-            using var connection = new SqliteConnection("Data Source=SafedPasswords.db");
+            using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
             connection.Open();
             
             var cmd = connection.CreateCommand();
@@ -26,7 +26,7 @@ public class UseDatabase {
 
     public static void readDataInDatabase() {
         try {
-            using var connection = new SqliteConnection("Data Source=SafedPasswords.db");
+            using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
             connection.Open();
 
             var cmd = connection.CreateCommand();
@@ -34,19 +34,20 @@ public class UseDatabase {
             cmd.CommandText = "SELECT * FROM Passwords";
             using var reader = cmd.ExecuteReader();
 
+            Console.WriteLine("\x1b[1mAll saved Passwords in the database:\x1b[0m");
             while (reader.Read()) {
                 Console.WriteLine(
                     $"ID: {reader["Id"]}, Username: {reader["User"]}, Password: {reader["Password"]}, Description: {reader["Description"]}"
                 );
             }
         } catch (Exception e) {
-            Console.WriteLine("Something went wrong with reading the database.");
+            Console.WriteLine("Something went wrong with reading the database. Has the database any data?");
         }
     }
 
     public static int deleteDataInDatabase(long id) {
         try {
-            using var connection = new SqliteConnection("Data Source=SafedPasswords.db");
+            using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
             connection.Open();
 
             var deleteCmd = connection.CreateCommand();

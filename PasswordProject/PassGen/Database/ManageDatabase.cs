@@ -1,4 +1,4 @@
-namespace PasswordProject;
+namespace PassGen;
 
 using Microsoft.Data.Sqlite;
 
@@ -6,7 +6,7 @@ public class CreateDatabase {
     public static int crateDatabase() {
         
         try {
-            using var connection = new SqliteConnection("Data Source=SafedPasswords.db");
+            using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
             connection.Open();
 
             //Creates the Database

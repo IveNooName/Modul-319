@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordProject", "PasswordProject\PasswordProject.csproj", "{85DCD0DB-F733-4267-A10C-2E801E23E8C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassGen", "PassGen\PassGen.csproj", "{85DCD0DB-F733-4267-A10C-2E801E23E8C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
