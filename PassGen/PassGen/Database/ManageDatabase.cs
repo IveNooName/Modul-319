@@ -3,7 +3,7 @@ namespace PassGen;
 using Microsoft.Data.Sqlite;
 
 public class CreateDatabase {
-    public static int crateDatabase() {
+    public static int createDatabase() {
         
         try {
             using var connection = new SqliteConnection("Data Source=SavedPasswords.db");

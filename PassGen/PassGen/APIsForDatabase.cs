@@ -3,7 +3,7 @@ namespace PassGen;
 public class APIsForDatabase {
     
     public static void savePassword(String password) {
-        int resultDatabaseCreation = CreateDatabase.crateDatabase();
+        int resultDatabaseCreation = CreateDatabase.createDatabase();
 
         if (resultDatabaseCreation == -1) {
             Console.WriteLine("A serious error occurred. Please restart the application. \n" +
