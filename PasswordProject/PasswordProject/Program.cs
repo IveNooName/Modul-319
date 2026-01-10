@@ -3,14 +3,23 @@
 using PasswordProject;
 
 public class Program {
-    public static void Main(string[] args) {
+    public static void Main() {
         printHeader();
 
         bool isActive = true;
+        String password = "";
+        
         do {
+            int selection = contextMenu();
             
-            if (contextMenu() == 1) {
-                passwordGenerator();
+            if (selection == 1) {
+                password = passwordGenerator();
+            } else if (selection == 2) {
+                APIsForDatabase.safePassword(password);
+            } else if (selection == 3) {
+                APIsForDatabase.readPassword();
+            } else if (selection == 4) {
+                
             } else {
                 isActive = false;
             }
@@ -21,11 +30,11 @@ public class Program {
 
     }
 
-    private static void passwordGenerator() {
+    private static String passwordGenerator() {
         //User-input for the length
         Console.Write("Lenght: ");
 
-        if (int.TryParse(Console.ReadLine(), out int length) && length >= 0) {
+        if (int.TryParse(Console.ReadLine(), out int length) && length > 0) {
             
             String password = generator(length);
             
@@ -37,15 +46,18 @@ public class Program {
             
             Console.WriteLine("=======================================");
             Console.WriteLine(); //Layout
+            
+            return password;
         } else {
-            Console.WriteLine("\u001B[31m" + "Sorry, that's not a number, that can generate the password! Please enter a number that is one or bigger." + "\u001B[0m");
+            Console.WriteLine("\u001B[31m" + "Sorry, that's not a number, that can generate the password! Please enter a number that is between one and two billion." + "\u001B[0m");
             Console.WriteLine(); //Layout
+            return null;
         }
     }
 
 
     private static string generator(int length) {
-        char[][] matrix = Letters.LettersForPassword(); //Location, where the chars are safed for the generation
+        char[][] matrix = LetterStorage.LettersForPassword(); //Location, where the chars are safed for the generation
 
         char[] generatedLetters = new char[length];
 
@@ -76,7 +88,7 @@ public class Program {
     }
 
     
-    private static void printLoadingAnimation(int times) {
+    public static void printLoadingAnimation(int times) {
         int x = 0;
 
         Console.CursorVisible = false;
@@ -99,18 +111,27 @@ public class Program {
     private static int contextMenu() {
         
         Console.WriteLine("1) Generate a password");
-        Console.WriteLine("2) Exit");
+        Console.WriteLine("2) Safe Password");
+        Console.WriteLine("3) Look at the safed Passwords");
+        Console.WriteLine("4) Delete Password");
+        Console.WriteLine("5) Exit");
         
-        char selection = Console.ReadKey().KeyChar;
+        char selection = Console.ReadLine()[0];
         Console.WriteLine(); //Layout
-        
-        if (selection == '1') {
-            return 1;
-        }
-        if (selection == '2') {
-            return 2;
-        } else {
-            return contextMenu();
+         
+        switch (selection) {
+            case '1':
+                return 1;
+            case '2':
+                return 2;
+            case '3':
+                return 3;
+            case '4':
+                return 4;
+            case '5':
+                return 5;
+            default:
+                return contextMenu();
         }
     }
 }

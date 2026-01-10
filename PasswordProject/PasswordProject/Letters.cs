@@ -1,6 +1,6 @@
 namespace PasswordProject;
 
-public class Letters {
+public class LetterStorage {
     public static char[][] LettersForPassword() {
         char[][] matrix = new char[4][];
         matrix[0] = new char[] {
