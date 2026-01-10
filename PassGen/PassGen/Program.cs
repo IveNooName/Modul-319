@@ -1,25 +1,26 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using PassGen;
+namespace PassGen;
 
-public class Program {
+public static class Program {
     public static void Main() {
-        printHeader();
+        PrintHeader();
         
         bool isActive = true;
-        String password = "";
+        string password = "";
         
         do {
-            int selection = contextMenu();
+            int selection = ContextMenu();
+            Console.WriteLine(selection + "\n"); //override user-input for preventing sus layout
             
             if (selection == 1) {
-                password = passwordGenerator();
+                password = PasswordGenerator();
             } else if (selection == 2) {
-                APIsForDatabase.savePassword(password);
+                ApisForDatabase.SavePassword(password);
             } else if (selection == 3) {
-                APIsForDatabase.readPassword();
+                ApisForDatabase.ReadPassword();
             } else if (selection == 4) {
-                APIsForDatabase.deletePassword();
+                ApisForDatabase.DeletePassword();
             } else {
                 isActive = false;
             }
@@ -30,18 +31,18 @@ public class Program {
 
     }
 
-    private static String passwordGenerator() {
+    private static string PasswordGenerator() {
         //User-input for the length
         Console.Write("Lenght: ");
 
-        if (int.TryParse(Console.ReadLine(), out int length) && length > 0) {
+        if (int.TryParse(Console.ReadLine(), out int length) && length > 0 && length <= 1000) {
             
-            String password = generator(length);
+            string password = Generator(length);
             
             Console.WriteLine("\n=======================================");
             
             Console.WriteLine("Your password with the length of " + length + " is: ");
-            printLoadingAnimation(3);
+            PrintLoadingAnimation(3);
             Console.WriteLine("\u001B[32m" + password + "\u001B[0m");
             
             Console.WriteLine("=======================================");
@@ -49,32 +50,32 @@ public class Program {
             
             return password;
         } else {
-            Console.WriteLine("\u001B[31m" + "Sorry, that's not a number, that can generate the password! Please enter a number that is between one and two billion." + "\u001B[0m");
+            Console.WriteLine("\u001B[31m" + "Sorry, that's not a number, that can generate the password! Please enter a natural number that is between one and one thousand." + "\u001B[0m");
             Console.WriteLine(); //Layout
-            return null;
+            return "";
         }
     }
 
 
-    private static string generator(int length) {
+    private static string Generator(int length) {
         char[][] matrix = LetterStorage.LettersForPassword(); //Location, where the chars are saved for the generation
 
         char[] generatedLetters = new char[length];
 
         for (int i = 0; i < length; i++) {
-            int randomRow = new Random().Next(0, 4);
-            int randomChiffre = new Random().Next(0, matrix[randomRow].Length);
+            int randomRow = Random.Shared.Next(0, 4);
+            int randomChiffre = Random.Shared.Next(0, matrix[randomRow].Length);
             generatedLetters[i] = matrix[randomRow][randomChiffre];
         }
 
-        String password = new String(generatedLetters);
+        string password = new string(generatedLetters);
         return password;
     }
 
     
     
     
-    private static void printHeader() {
+    private static void PrintHeader() {
         Console.WriteLine("""
 
                             ██████╗  █████╗ ███████╗███████╗ ██████╗ ███████╗███╗   ██╗
@@ -88,7 +89,7 @@ public class Program {
     }
 
     
-    public static void printLoadingAnimation(int times) {
+    public static void PrintLoadingAnimation(int times) {
         int x = 0;
 
         Console.CursorVisible = false;
@@ -108,7 +109,7 @@ public class Program {
         Console.CursorVisible = true;
     }
 
-    private static int contextMenu() {
+    private static int ContextMenu() {
         
         Console.WriteLine("1) Generate a password");
         Console.WriteLine("2) Save Password");
@@ -116,28 +117,39 @@ public class Program {
         Console.WriteLine("4) Delete Password");
         Console.WriteLine("5) Exit");
 
-        char selection;
-        
-        try {
-            selection = Console.ReadLine()[0];
-        } catch (Exception e) {
-            selection = 'H'; //Giving selection a letter, that triggers default in the switch statement.
-        }
-        Console.WriteLine(); //Layout
-         
-        switch (selection) {
-            case '1':
-                return 1;
-            case '2':
-                return 2;
-            case '3':
-                return 3;
-            case '4':
-                return 4;
-            case '5':
-                return 5;
-            default:
-                return contextMenu();
+        int startLeft = Console.CursorLeft;
+        int startTop  = Console.CursorTop;
+        bool overrideChar = true;
+
+        while (true) {
+            var keyInfo = Console.ReadKey(intercept: overrideChar);
+            char selection = keyInfo.KeyChar;
+
+            switch (selection) {
+                case '1':
+                    return 1;
+                case '2':
+                    return 2;
+                case '3':
+                    return 3;
+                case '4':
+                    return 4;
+                case '5':
+                    return 5;
+            }
+
+            // Colorize the Wrong user-input
+            Console.SetCursorPosition(startLeft, startTop);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(selection);
+            Console.ResetColor();
+
+            Thread.Sleep(500);
+
+            // Override false input
+            Console.SetCursorPosition(startLeft, startTop);
+            Console.Write(' ');                 
+            Console.SetCursorPosition(startLeft, startTop); // reset cursor
         }
     }
 }

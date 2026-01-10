@@ -1,9 +1,9 @@
-namespace PassGen;
+namespace PassGen.Database;
 
 using Microsoft.Data.Sqlite;
 
-public class UseDatabase {
-    public static bool writeDataInDatabase(String User, String Password, String Description) {
+public static class UseDatabase {
+    public static bool WriteDataInDatabase(string user, string password, string description) {
         try {
             using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
             connection.Open();
@@ -13,18 +13,18 @@ public class UseDatabase {
             cmd.CommandText = "INSERT INTO Passwords (User, Password, Description) VALUES ($user, $password, $description)";
 
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("$user", User);
-            cmd.Parameters.AddWithValue("$password", Password);
-            cmd.Parameters.AddWithValue("$description", Description);
+            cmd.Parameters.AddWithValue("$user", user);
+            cmd.Parameters.AddWithValue("$password", password);
+            cmd.Parameters.AddWithValue("$description", description);
             cmd.ExecuteNonQuery();
 
             return true;
-        } catch (Exception e) {
+        } catch (Exception) {
             return false;
         }
     }
 
-    public static void readDataInDatabase() {
+    public static void ReadDataInDatabase() {
         try {
             using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
             connection.Open();
@@ -34,18 +34,18 @@ public class UseDatabase {
             cmd.CommandText = "SELECT * FROM Passwords";
             using var reader = cmd.ExecuteReader();
 
-            Console.WriteLine("\x1b[1mAll saved Passwords in the database:\x1b[0m");
+            Console.WriteLine("\e[1mAll saved Passwords in the database:\e[0m");
             while (reader.Read()) {
                 Console.WriteLine(
                     $"ID: {reader["Id"]}, Username: {reader["User"]}, Password: {reader["Password"]}, Description: {reader["Description"]}"
                 );
             }
-        } catch (Exception e) {
+        } catch (Exception) {
             Console.WriteLine("Something went wrong with reading the database. Has the database any data?");
         }
     }
 
-    public static int deleteDataInDatabase(long id) {
+    public static int DeleteDataInDatabase(long id) {
         try {
             using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
             connection.Open();
@@ -60,7 +60,7 @@ public class UseDatabase {
                 return 1;
             }
             return 2;
-        } catch (Exception e) {
+        } catch (Exception) {
             Console.WriteLine($"Something went wrong with deleting something database.");
             return -1;
         }

@@ -1,6 +1,6 @@
 namespace PassGen;
 
-public abstract class LetterStorage {
+public static class LetterStorage {
     public static char[][] LettersForPassword() {
         char[][] matrix = new char[4][];
         matrix[0] = [

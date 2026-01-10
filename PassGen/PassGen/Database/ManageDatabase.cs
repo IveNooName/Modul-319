@@ -1,9 +1,9 @@
-namespace PassGen;
+namespace PassGen.Database;
 
 using Microsoft.Data.Sqlite;
 
-public class CreateDatabase {
-    public static int createDatabase() {
+public static class CreateDatabase {
+    public static int CreateDatabaseFile() {
         
         try {
             using var connection = new SqliteConnection("Data Source=SavedPasswords.db");
@@ -21,7 +21,7 @@ public class CreateDatabase {
             
             return 1;
             
-        } catch (Exception e) {
+        } catch (Exception) {
             return -1;
         }
 

@@ -1,9 +1,11 @@
 namespace PassGen;
 
-public class APIsForDatabase {
+using Database;
+
+public static class ApisForDatabase {
     
-    public static void savePassword(String password) {
-        int resultDatabaseCreation = CreateDatabase.createDatabase();
+    public static void SavePassword(string password) {
+        int resultDatabaseCreation = CreateDatabase.CreateDatabaseFile();
 
         if (resultDatabaseCreation == -1) {
             Console.WriteLine("A serious error occurred. Please restart the application. \n" +
@@ -42,7 +44,7 @@ public class APIsForDatabase {
                         } while (description == "");
 
                         
-                        saveStatus = UseDatabase.writeDataInDatabase(userName, password, description);
+                        saveStatus = UseDatabase.WriteDataInDatabase(userName, password, description);
                         Console.WriteLine(saveStatus
                             ? "Password was successfully saved"
                             : "A serious error occurred. Please try restart the application and try again.");
@@ -53,7 +55,7 @@ public class APIsForDatabase {
 
                     case 'n':
                         repeatContextMenu = false;
-                        saveStatus = UseDatabase.writeDataInDatabase("Not Provided", password, "Not Provided");
+                        saveStatus = UseDatabase.WriteDataInDatabase("Not Provided", password, "Not Provided");
 
                         Console.WriteLine(); //Layout
 
@@ -68,7 +70,7 @@ public class APIsForDatabase {
         }
     }
 
-    public static void readPassword() {
+    public static void ReadPassword() {
 
         char selection;
 
@@ -80,30 +82,29 @@ public class APIsForDatabase {
 
             Console.WriteLine(""); //Layout
 
-            if (selection == 'y') {
-                Console.WriteLine(); //Layout
+            if (selection != 'y') continue;
+            Console.WriteLine(); //Layout
 
-                Program.printLoadingAnimation(3);
+            Program.PrintLoadingAnimation(3);
                 
-                UseDatabase.readDataInDatabase();
-            }
-        } while (!(selection == 'y' || selection == 'n'));
+            UseDatabase.ReadDataInDatabase();
+        } while (selection is not ('y' or 'n'));
 
         Console.WriteLine(); //Layout
     }
     
-    public static void deletePassword() {
+    public static void DeletePassword() {
         Console.Write("Which Password would you like to delete? Enter the ID of the Password: ");
 
-        if (long.TryParse(Console.ReadLine(), out long passwordID)) {
-            int deleteStatus = UseDatabase.deleteDataInDatabase(passwordID);
+        if (long.TryParse(Console.ReadLine(), out long passwordId)) {
+            int deleteStatus = UseDatabase.DeleteDataInDatabase(passwordId);
 
             switch (deleteStatus) {
                 case 1:
                     Console.WriteLine($"The password was successfully deleted");
                     break;
                 case 2:
-                    Console.WriteLine($"The ID {passwordID} was not found in the database");
+                    Console.WriteLine($"The ID {passwordId} was not found in the database");
                     break;
                 case -1:
                     Console.WriteLine("A serious error occurred. Please restart the application and try again.");
