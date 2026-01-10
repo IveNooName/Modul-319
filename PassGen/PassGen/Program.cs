@@ -13,16 +13,22 @@ public static class Program {
             int selection = ContextMenu();
             Console.WriteLine(selection + "\n"); //override user-input for preventing sus layout
             
-            if (selection == 1) {
-                password = PasswordGenerator();
-            } else if (selection == 2) {
-                ApisForDatabase.SavePassword(password);
-            } else if (selection == 3) {
-                ApisForDatabase.ReadPassword();
-            } else if (selection == 4) {
-                ApisForDatabase.DeletePassword();
-            } else {
-                isActive = false;
+            switch (selection) {
+                case 1:
+                    password = PasswordGenerator();
+                    break;
+                case 2:
+                    ApisForDatabase.SavePassword(password);
+                    break;
+                case 3:
+                    ApisForDatabase.ReadPassword();
+                    break;
+                case 4:
+                    ApisForDatabase.DeletePassword();
+                    break;
+                default:
+                    isActive = false;
+                    break;
             }
 
         } while (isActive);
@@ -35,7 +41,7 @@ public static class Program {
         //User-input for the length
         Console.Write("Lenght: ");
 
-        if (int.TryParse(Console.ReadLine(), out int length) && length > 0 && length <= 1000) {
+        if (int.TryParse(Console.ReadLine(), out int length) && length is > 0 and <= 1000) {
             
             string password = Generator(length);
             
@@ -119,10 +125,9 @@ public static class Program {
 
         int startLeft = Console.CursorLeft;
         int startTop  = Console.CursorTop;
-        bool overrideChar = true;
 
         while (true) {
-            var keyInfo = Console.ReadKey(intercept: overrideChar);
+            var keyInfo = Console.ReadKey(intercept: true);
             char selection = keyInfo.KeyChar;
 
             switch (selection) {

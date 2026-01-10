@@ -36,12 +36,12 @@ public static class ApisForDatabase {
                         do {
                             Console.Write("Enter username: ");
                             userName = Console.ReadLine();
-                        } while (userName == "");
+                        } while (string.IsNullOrEmpty(userName));
 
                         do {
                             Console.Write("Enter description: ");
                             description = Console.ReadLine();
-                        } while (description == "");
+                        } while (string.IsNullOrEmpty(description));
 
                         
                         saveStatus = UseDatabase.WriteDataInDatabase(userName, password, description);
