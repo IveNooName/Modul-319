@@ -12,4 +12,8 @@
       <PackageReference Include="System.Data.SQLite" Version="2.0.2" />
     </ItemGroup>
 
+    <PropertyGroup>
+        <ApplicationIcon>icon.ico</ApplicationIcon>
+    </PropertyGroup>
+
 </Project>
