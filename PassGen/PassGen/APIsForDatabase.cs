@@ -106,9 +106,6 @@ public static class ApisForDatabase {
                 case 2:
                     Console.WriteLine($"The ID {passwordId} was not found in the database");
                     break;
-                case -1:
-                    Console.WriteLine("A serious error occurred. Please restart the application and try again.");
-                    break;
             }
 
             Console.WriteLine(); //Layout

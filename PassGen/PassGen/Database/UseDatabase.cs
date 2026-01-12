@@ -41,7 +41,7 @@ public static class UseDatabase {
                 );
             }
         } catch (Exception) {
-            Console.WriteLine("Something went wrong with reading the database. Has the database any data?");
+            Console.WriteLine("Something went wrong with reading the database. Exist the Database and has any data?");
         }
     }
 
@@ -61,7 +61,7 @@ public static class UseDatabase {
             }
             return 2;
         } catch (Exception) {
-            Console.WriteLine($"Something went wrong with deleting something database.");
+            Console.WriteLine($"Something went wrong with deleting something database. Exist the Database and has any data?");
             return -1;
         }
     }
