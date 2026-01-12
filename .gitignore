@@ -78,3 +78,6 @@ obj/
 # Sicherheitsnetz: jede andere Datei in bin/ oder obj/ trotzdem ignorieren
 bin/**/*.* !bin/**/*.exe !bin/**/*.pdb
 obj/**/*.* !obj/**/*.exe !obj/**/*.pdb
+
+# Mac
+.DS_Store

@@ -1,0 +1,43 @@
+﻿// See https://aka.ms/new-console-template for more information
+
+class Program {
+    static void Main(string[] args) {
+        sayHello();
+        divideByTwo(134);
+        addTwoDigitsTogether(66, 1);
+        isOfLegalAge(67);
+        sayHelloWithName("Ruby");
+        isDigitEven(67); 
+        priceWithPercentage(100, 20);
+    }
+
+    private static void sayHello() {
+        Console.WriteLine("Hallo und willkommen!");
+    }
+
+    private static double divideByTwo(double input) {
+        return input / 2;
+    }
+
+    private static int addTwoDigitsTogether(int digit1, int digit2) {
+        return digit1 + digit2;
+    }
+
+    private static bool isOfLegalAge(int age) {
+        return age >= 18;
+    }
+
+    private static void sayHelloWithName(String name) {
+        Console.WriteLine("Hello " + name + "!");
+    }
+
+    private static bool isDigitEven(int number) {
+        return number % 2 == 0;
+    }
+
+    private static double priceWithPercentage(double price, int percentage) {
+        return price * (1 - percentage / 100.0); 
+        //(1 - percentage / 100.0) is for calculating the special percent, that the program works
+    }
+    
+}
